@@ -29,6 +29,6 @@ module.exports = {
 
     const { description, link, title } = results[0]
 
-    interaction.reply(`**${title}**\n${description}\n${link}`)
+    await interaction.reply(`**${title}**\n${description}\n${link}`)
   }
 }
