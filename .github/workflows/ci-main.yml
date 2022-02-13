@@ -52,10 +52,12 @@ jobs:
           echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
           echo "SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
-      - name: Deploy commands to Eagle Jump
+      - name: Setup node
         uses: actions/setup-node@v2
         with:
           node-version: '16'
+
+      - name: Deploy commands to Eagle Jump
         run: |
           yarn
           yarn run deploy-commands
