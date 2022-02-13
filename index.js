@@ -2,8 +2,6 @@ const { BOT_TOKEN } = require("./secrets")
 const { Client, Intents, Collection} = require('discord.js')
 const fs = require("fs");
 
-console.log("BOT_TOKEN", BOT_TOKEN)
-
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.DIRECT_MESSAGES] })
 
 client.commands = new Collection()

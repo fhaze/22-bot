@@ -71,7 +71,7 @@ jobs:
             helm upgrade \
             --install kou-yagami charts/kou-yagami \
             --set image.tag=${{ steps.commit_hash.outputs.sha_short }} \
-            --set secrets.botKey=${{ secrets.BOT_TOKEN }} \
+            --set secrets.botToken=${{ secrets.BOT_TOKEN }} \
             --set secrets.clientId=${{ secrets.CLIENT_ID }} \
             --set secrets.guildId=${{ secrets.GUILD_ID }} \
             --set secrets.rapidApiKey=${{ secrets.RAPID_API_KEY }}
