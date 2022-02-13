@@ -20,7 +20,7 @@ module.exports = {
         'x-user-agent': 'desktop',
         'x-proxy-location': 'US',
         'x-rapidapi-host': 'google-search3.p.rapidapi.com',
-        'x-rapidapi-key': 'be1469e05bmsh519a339e914598dp19db20jsn9ca8d9c92348'
+        'x-rapidapi-key': RAPID_API_KEY
       },
     };
 
