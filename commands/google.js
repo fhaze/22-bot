@@ -24,11 +24,13 @@ module.exports = {
       },
     };
 
+    await interaction.deferReply()
+
     const { data } = await axios.request(options)
     const { results } = data
 
     const { description, link, title } = results[0]
 
-    await interaction.reply(`**${title}**\n${description}\n${link}`)
+    await interaction.editReply(`**${title}**\n${description}\n${link}`)
   }
 }

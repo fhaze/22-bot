@@ -52,8 +52,11 @@ module.exports = {
       data: [{Text: text}]
     };
 
+    await interaction.deferReply()
+
     const { data } = await axios.request(options)
     const translatedText = data[0].translations[0].text
-    await interaction.reply(translatedText)
+
+    await interaction.editReply(translatedText)
   }
 }
