@@ -81,6 +81,10 @@ tolerations: []
 
 affinity: {}
 
+# Discord Bot Config
+config:
+  commitHash: commit_hash
+
 # Discord Bot Secrets
 secrets:
   botToken: bot_token
