@@ -18,7 +18,7 @@ module.exports = {
       url: `https://google-search3.p.rapidapi.com/api/v1/search/q=${query.split(" ").join("+")}`,
       headers: {
         'x-user-agent': 'desktop',
-        'x-proxy-location': 'BR',
+        'x-proxy-location': 'US',
         'x-rapidapi-host': 'google-search3.p.rapidapi.com',
         'x-rapidapi-key': RAPID_API_KEY
       },
