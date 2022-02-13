@@ -54,6 +54,6 @@ module.exports = {
 
     const { data } = await axios.request(options)
     const translatedText = data[0].translations[0].text
-    interaction.reply({content: translatedText, components: [row]})
+    interaction.reply(translatedText)
   }
 }
