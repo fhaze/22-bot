@@ -74,5 +74,5 @@ jobs:
             --set secrets.botToken=${{ secrets.BOT_TOKEN }} \
             --set secrets.clientId=${{ secrets.CLIENT_ID }} \
             --set secrets.guildId=${{ secrets.GUILD_ID }} \
-            --set secrets.rapidApiKey=${{ secrets.RAPID_API_KEY }}
+            --set secrets.rapidApiKey=${{ secrets.RAPID_API_KEY }} \
             --set config.commitHash=${{ steps.commit_hash.outputs.sha_short }}
