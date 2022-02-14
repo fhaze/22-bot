@@ -91,3 +91,4 @@ secrets:
   clientId: client_id
   guildId: guild_id
   rapidApiKey: rapid_api_key
+  voiceRssKey: voice_rss_key
