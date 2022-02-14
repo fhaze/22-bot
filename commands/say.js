@@ -1,12 +1,9 @@
-const { joinVoiceChannel, createAudioPlayer, createAudioResource, entersState, VoiceConnectionStatus, AudioPlayerStatus,
-  StreamType
-} = require('@discordjs/voice')
+const { joinVoiceChannel, createAudioPlayer, createAudioResource, StreamType } = require('@discordjs/voice')
 const { SlashCommandBuilder } = require('@discordjs/builders')
 const axios = require("axios").default
 const { VOICE_RSS_KEY} = require("../secrets")
 const { writeFileSync } = require('fs')
 const crypto = require('crypto')
-const {createDiscordJSAdapter} = require("../adapter/play");
 
 const player = createAudioPlayer()
 
@@ -25,6 +22,9 @@ module.exports = {
       .setRequired(false)
       .addChoice("Portuguese", "pt-br")
       .addChoice("English", "en-us")
+      .addChoice("Chinese", "zh-cn")
+      .addChoice("Japanese", "ja-jp")
+      .addChoice("Deutsche", "de-de")
     ),
   execute: async (client, interaction) => {
     const text = interaction.options.getString("text")
@@ -53,25 +53,32 @@ module.exports = {
     writeFileSync(tmp, data)
     const resource = createAudioResource(tmp, {inputType: StreamType.Arbitrary})
     player.play(resource)
-    await entersState(player, AudioPlayerStatus.Playing, 5e3)
 
     const guild = client.guilds.cache.get(interaction.guildId)
     const member = guild.members.cache.get(interaction.member.user.id);
     const voiceChannel = member.voice.channel;
 
+    await interaction.deferReply()
+
     const connection = joinVoiceChannel({
       channelId: voiceChannel.id,
       guildId: voiceChannel.guild.id,
-      adapterCreator: createDiscordJSAdapter(voiceChannel)
+      adapterCreator: interaction.guild.voiceAdapterCreator
+    })
+
+    player.addListener('stateChange', (_, state) => {
+      if (state.status === "idle") {
+        connection.destroy()
+        player.removeAllListeners()
+      }
     })
 
     try {
-      await entersState(connection, VoiceConnectionStatus.Ready, 30e3)
       connection.subscribe(player)
     } catch (error) {
       console.error(error)
     }
 
-    await interaction.reply("Done!", { ephemeral: true })
+    await interaction.editReply(`I said "${text}" on the <#${voiceChannel.id}> channel.`)
   }
 }
