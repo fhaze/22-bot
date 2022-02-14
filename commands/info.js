@@ -21,7 +21,7 @@ module.exports = {
     })
 
     const msg = `**Environment**: ${config.COMMIT_HASH ? "[Tencent Cloud](https://cloud.tencent.com)" : "Running on my Local Machine"}
-**Commit Hash**: [${config.COMMIT_HASH ?? "Unknown"}](https://hub.docker.com/repository/docker/fhaze/kou-yagami)"}
+**Commit Hash**: [${config.COMMIT_HASH ?? "Unknown"}](https://hub.docker.com/repository/docker/fhaze/kou-yagami)
 **OS**: ${version.join(" ")}
 **Created by**: [FHaze](https://github.com/fhaze)`
 
