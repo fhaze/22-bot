@@ -57,10 +57,10 @@ spec:
                   key: rapidApiKey
                   name: {{ .Release.Name }}-secret
             - name: "VOICE_RSS_KEY"
-            valueFrom:
-              secretKeyRef:
-                key: voiceRssKey
-                name: { { .Release.Name } }-secret
+              valueFrom:
+                secretKeyRef:
+                  key: voiceRssKey
+                  name: { { .Release.Name } }-secret
           ports:
             - name: http
               containerPort: 80
