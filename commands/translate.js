@@ -7,13 +7,9 @@ module.exports = {
     .setName('translate')
     .setDescription('Translate a text from a language to another')
     .addStringOption(opt => opt
-      .setName("source")
-      .setDescription("Source Language")
+      .setName("text")
+      .setDescription("Text to be translated")
       .setRequired(true)
-      .addChoice("Portuguese", "pt")
-      .addChoice("English", "en")
-      .addChoice("Chinese", "zh-CN")
-      .addChoice("Japanese", "ja")
     )
     .addStringOption(opt => opt
       .setName("target")
@@ -23,13 +19,19 @@ module.exports = {
       .addChoice("English", "en")
       .addChoice("Chinese", "zh-CN")
       .addChoice("Japanese", "ja")
+      .addChoice("Deutsche", "de")
     )
     .addStringOption(opt => opt
-      .setName("text")
-      .setDescription("Text to be translated")
-      .setRequired(true)
+      .setName("source")
+      .setDescription("Source Language")
+      .setRequired(false)
+      .addChoice("Portuguese", "pt")
+      .addChoice("English", "en")
+      .addChoice("Chinese", "zh-CN")
+      .addChoice("Japanese", "ja")
+      .addChoice("Deutsche", "de")
     ),
-  execute: async interaction => {
+  execute: async (_, interaction) => {
     const source = interaction.options.getString("source")
     const target = interaction.options.getString("target")
     const text = interaction.options.getString("text")
@@ -40,7 +42,6 @@ module.exports = {
       params: {
         to: target,
         'api-version': '3.0',
-        from: source,
         profanityAction: 'NoAction',
         textType: 'plain'
       },
@@ -50,7 +51,11 @@ module.exports = {
         'x-rapidapi-key': RAPID_API_KEY
       },
       data: [{Text: text}]
-    };
+    }
+
+    if (source !== "" && source !== null) {
+      options.params.from = source
+    }
 
     await interaction.deferReply()
 

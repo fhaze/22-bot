@@ -11,7 +11,7 @@ module.exports = {
       .setDescription("Query")
       .setRequired(true)
     ),
-  execute: async interaction => {
+  execute: async (_, interaction) => {
     const query = interaction.options.getString("query")
     const options = {
       method: 'GET',

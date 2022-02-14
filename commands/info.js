@@ -6,7 +6,7 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName('info')
     .setDescription('Information about Kou Yagami Bot'),
-  execute: async interaction => {
+  execute: async (_, interaction) => {
     const data = fs.readFileSync('/etc/os-release', 'utf8').split("\n")
     let version = []
 
