@@ -3,10 +3,7 @@ const api = require("../api");
 const persistUserThen = async (user, func) => {
   const { id, username, avatar } = user
   try {
-    const { name: eName, avatar: eAvatar } = await api.user.get(id)
-    if (eName !== name || avatar !== eAvatar) {
-      await api.user.save({ discordId: id, name: username, avatar })
-    }
+    await api.user.get(id)
     func(user)
   } catch (e) {
     if (!e.response) {
