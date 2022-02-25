@@ -14,17 +14,16 @@ module.exports = {
     embed
       .setAuthor({ name: `${name}'s Profile`, iconURL: interaction.guild.iconURL() })
       .setThumbnail(interaction.user.displayAvatarURL({ size: 256 }))
-      .setDescription(`**Messages**
-${messageCount}
+      .addFields(
+        { name: "Level", value: `1`, inline: true },
+        { name: "EXP", value: `0`, inline: true },
+        { name: "\u200B", value: `\u200B`, inline: true },
+        { name: "Messages", value: `${messageCount}`, inline: true },
+        { name: "Commands", value: `${commandCount}`, inline: true },
+        { name: "Eagle Coin", value: `${eagleCoin}`, inline: true },
+        { name: "Joined", value: isoToPretty(joinedAt) },
+      )
 
-**Commands**
-${commandCount}
-
-**Eagle Coin**
-${eagleCoin}
-
-**Joined**
-${isoToPretty(joinedAt)}`)
 
     interaction.reply({ embeds: [ embed ] })
   }

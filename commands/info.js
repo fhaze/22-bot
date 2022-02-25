@@ -26,18 +26,12 @@ module.exports = {
     embed
       .setAuthor({ name: "Kou Yagami's Info", iconURL: interaction.guild.iconURL() })
       .setThumbnail(client.user.displayAvatarURL({ size: 256 }))
-      .setDescription(`**Running on**
-${config.COMMIT_HASH ? "[Tencent Cloud](https://cloud.tencent.com)" : "My Local Machine"}
-
-**Image Tag**
-[${config.COMMIT_HASH ?? "Unknown"}](https://hub.docker.com/repository/docker/fhaze/kou-yagami)
-
-**OS**
-${version.join(" ")}
-
-**Created by**
-[FHaze](https://github.com/fhaze)`)
-
+      .setFields(
+        {name: "Running on", value: config.COMMIT_HASH ? "[Tencent Cloud](https://cloud.tencent.com)" : "My Local Machine"},
+        {name: "Image Tag", value: `[${config.COMMIT_HASH ?? "Unknown"}](https://hub.docker.com/repository/docker/fhaze/kou-yagami)`},
+        {name: "OS", value: version.join(" ")},
+        {name: "Created by", value: "[FHaze](https://github.com/fhaze)"},
+      )
     interaction.reply({ embeds: [embed] })
   }
 }
