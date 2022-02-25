@@ -1,16 +1,19 @@
 const api = require("../api");
 
 const persistUserThen = async (user, func) => {
-  const { id, username } = user
+  const { id, username, avatar } = user
   try {
-    await api.user.get(id)
+    const { name: eName, avatar: eAvatar } = await api.user.get(id)
+    if (eName !== name || avatar !== eAvatar) {
+      await api.user.save({ discordId: id, name: username, avatar })
+    }
     func(user)
   } catch (e) {
     if (!e.response) {
       throw new Error("eagle-jump api is down")
     }
     if (e.response.status === 404) {
-      await api.user.save({ discordId: id, name: username })
+      await api.user.save({ discordId: id, name: username, avatar })
       func(user)
     }
   }
