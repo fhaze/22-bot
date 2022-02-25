@@ -49,8 +49,8 @@ module.exports = {
     }
 
     const guild = client.guilds.cache.get(interaction.guildId)
-    const member = guild.members.cache.get(interaction.member.user.id);
-    const voiceChannel = member.voice.channel;
+    const member = guild.members.cache.get(interaction.member.user.id)
+    const voiceChannel = member.voice.channel
 
     if (!voiceChannel || !voiceChannel.isVoice()) {
       await interaction.reply({content: "Not in a Voice channel.", ephemeral: true})
@@ -58,7 +58,7 @@ module.exports = {
     }
 
     const { data } = await axios.request(options)
-    const tmp = `/tmp/${crypto.randomBytes(20).toString('hex')}.mp3`;
+    const tmp = `/tmp/${crypto.randomBytes(20).toString('hex')}.mp3`
     writeFileSync(tmp, data)
     const resource = createAudioResource(tmp, {inputType: StreamType.Arbitrary})
     player.play(resource)

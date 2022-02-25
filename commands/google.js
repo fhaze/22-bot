@@ -22,7 +22,7 @@ module.exports = {
         'x-rapidapi-host': 'google-search3.p.rapidapi.com',
         'x-rapidapi-key': RAPID_API_KEY
       },
-    };
+    }
 
     await interaction.deferReply()
 

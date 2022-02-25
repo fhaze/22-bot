@@ -1,8 +1,12 @@
 const { BOT_TOKEN } = require("./secrets")
 const { Client, Intents, Collection} = require('discord.js')
-const fs = require("fs");
+const fs = require("fs")
+const { sumUserMessage, sumUserCommand } = require('./integrations/eagle-jump/service/user')
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.DIRECT_MESSAGES, Intents.FLAGS.GUILD_VOICE_STATES] })
+module.exports = {
+  client
+}
 
 client.commands = new Collection()
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'))
@@ -12,23 +16,30 @@ commandFiles.forEach(file => {
   client.commands.set(command.data.name, command)
 })
 
+
 client.on('interactionCreate', async interaction => {
-  if (!interaction.isCommand()) return;
+  if (!interaction.isCommand()) return
 
-  const command = client.commands.get(interaction.commandName);
-
-  if (!command) return;
+  const command = client.commands.get(interaction.commandName)
+  if (!command) return
 
   try {
-    await command.execute(client, interaction);
+    await command.execute(client, interaction)
+    await sumUserCommand({ user: interaction.user, count: 1 })
   } catch (error) {
-    console.error(error);
-    await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+    console.error(error)
+    await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true })
   }
-});
+})
+
+client.on('messageCreate', async message => {
+  if (!message.content.startsWith("/")) {
+    await sumUserMessage({ user: message.author, count: 1 })
+  }
+})
 
 client.once('ready', () => {
-  console.log('Ready!');
-});
+  console.log('Ready!')
+})
 
 client.login(BOT_TOKEN)

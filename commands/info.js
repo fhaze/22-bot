@@ -1,6 +1,8 @@
 const { SlashCommandBuilder } = require('@discordjs/builders')
 const fs = require('fs')
-const config = require("../config");
+const config = require("../config")
+const Discord = require("discord.js");
+const {client} = require("../index");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -20,11 +22,22 @@ module.exports = {
       }
     })
 
-    const msg = `**Environment**: ${config.COMMIT_HASH ? "[Tencent Cloud](https://cloud.tencent.com)" : "Running on my Local Machine"}
-**Commit Hash**: [${config.COMMIT_HASH ?? "Unknown"}](https://hub.docker.com/repository/docker/fhaze/kou-yagami)
-**OS**: ${version.join(" ")}
-**Created by**: [FHaze](https://github.com/fhaze)`
+    const embed = new Discord.MessageEmbed()
+    embed
+      .setAuthor({ name: "Kou Yagami's Info", iconURL: interaction.guild.iconURL() })
+      .setThumbnail(client.user.displayAvatarURL({ size: 256 }))
+      .setDescription(`**Running on**
+${config.COMMIT_HASH ? "[Tencent Cloud](https://cloud.tencent.com)" : "My Local Machine"}
 
-    interaction.reply(msg)
+**Image Tag**
+[${config.COMMIT_HASH ?? "Unknown"}](https://hub.docker.com/repository/docker/fhaze/kou-yagami)
+
+**OS**
+${version.join(" ")}
+
+**Created by**
+[FHaze](https://github.com/fhaze)`)
+
+    interaction.reply({ embeds: [embed] })
   }
 }

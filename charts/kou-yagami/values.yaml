@@ -84,6 +84,7 @@ affinity: {}
 # Discord Bot Config
 config:
   commitHash: commit_hash
+  eagleJumpApiEndpoint: http://eagle-jump-api:8888/eagle-jump
 
 # Discord Bot Secrets
 secrets:
@@ -92,3 +93,4 @@ secrets:
   guildId: guild_id
   rapidApiKey: rapid_api_key
   voiceRssKey: voice_rss_key
+  eagleJumpRootApiKey: root_key
