@@ -1,12 +1,8 @@
 const { BOT_TOKEN } = require("./secrets")
-const { Client, Intents, Collection} = require('discord.js')
+const { Collection} = require('discord.js')
 const fs = require("fs")
 const { sumUserMessage, sumUserCommand } = require('./integrations/eagle-jump/service/user')
-
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.DIRECT_MESSAGES, Intents.FLAGS.GUILD_VOICE_STATES] })
-module.exports = {
-  client
-}
+const { client } = require('./integrations/discord')
 
 client.commands = new Collection()
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'))
