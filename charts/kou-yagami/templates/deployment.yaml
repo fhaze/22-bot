@@ -37,7 +37,7 @@ spec:
             - name: "COMMIT_HASH"
               value: {{ .Values.config.commitHash }}
             - name: "EAGLE_JUMP_API_ENDPOINT"
-              value: {{ .Values.config.eagleJumpEndpoint }}
+              value: {{ .Values.config.eagleJumpApiEndpoint }}
             - name: "BOT_TOKEN"
               valueFrom:
                 secretKeyRef:
