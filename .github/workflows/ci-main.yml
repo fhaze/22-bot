@@ -59,6 +59,9 @@ jobs:
 
       - name: Deploy commands to Eagle Jump
         run: |
+          export CLIENT_ID=${{ secrets.CLIENT_ID }}
+          export GUILD_ID=${{ secrets.GUILD_ID }}
+          export BOT_TOKEN=${{ secrets.BOT_TOKEN }}
           yarn
           yarn run deploy-commands
 
