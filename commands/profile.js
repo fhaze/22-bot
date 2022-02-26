@@ -1,5 +1,5 @@
 const {SlashCommandBuilder} = require("@discordjs/builders")
-const api = require("../integrations/eagle-jump/api");
+const api = require("../integrations/discord-22/api");
 const Discord = require('discord.js')
 const {isoToPretty} = require("../utils");
 

@@ -84,7 +84,7 @@ affinity: {}
 # Discord Bot Config
 config:
   commitHash: commit_hash
-  eagleJumpApiEndpoint: http://eagle-jump-api:8888/eagle-jump/api
+  eagleJumpApiEndpoint: http://discord-22-api:8888/22/api
 
 # Discord Bot Secrets
 secrets:

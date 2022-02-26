@@ -79,5 +79,5 @@ jobs:
             --set secrets.guildId=${{ secrets.GUILD_ID }} \
             --set secrets.rapidApiKey=${{ secrets.RAPID_API_KEY }} \
             --set secrets.voiceRssKey=${{ secrets.VOICE_RSS_KEY }} \
-            --set secrets.eagleJumpRootApiKey=${{ secrets.EAGLE_JUMP_ROOT_API_KEY }} \
+            --set secrets.eagleJumpRootApiKey=${{ secrets.DISCORD_22_ROOT_API_KEY }} \
             --set config.commitHash=${{ steps.commit_hash.outputs.sha_short }}

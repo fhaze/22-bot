@@ -1,7 +1,7 @@
 const { BOT_TOKEN } = require("./secrets")
 const { Collection} = require('discord.js')
 const fs = require("fs")
-const { sumUserMessage, sumUserCommand } = require('./integrations/eagle-jump/service/user')
+const { sumUserMessage, sumUserCommand } = require('./integrations/discord-22/service/user')
 const { client } = require('./integrations/discord')
 
 client.commands = new Collection()

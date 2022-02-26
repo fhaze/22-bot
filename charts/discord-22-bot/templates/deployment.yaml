@@ -36,7 +36,7 @@ spec:
           env:
             - name: "COMMIT_HASH"
               value: {{ .Values.config.commitHash }}
-            - name: "EAGLE_JUMP_API_ENDPOINT"
+            - name: "DISCORD_22_API_ENDPOINT"
               value: {{ .Values.config.eagleJumpApiEndpoint }}
             - name: "BOT_TOKEN"
               valueFrom:
@@ -63,7 +63,7 @@ spec:
                 secretKeyRef:
                   key: voiceRssKey
                   name: {{ .Release.Name }}-secret
-            - name: "EAGLE_JUMP_ROOT_API_KEY"
+            - name: "DISCORD_22_ROOT_API_KEY"
               valueFrom:
                 secretKeyRef:
                   key: eagleJumpRootApiKey
