@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "kou-yagami.fullname" . }}
+  name: {{ include "22-bot.fullname" . }}
   labels:
-    {{- include "kou-yagami.labels" . | nindent 4 }}
+    {{- include "22-bot.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "kou-yagami.selectorLabels" . | nindent 6 }}
+      {{- include "22-bot.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -18,13 +18,13 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "kou-yagami.selectorLabels" . | nindent 8 }}
+        {{- include "22-bot.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "kou-yagami.serviceAccountName" . }}
+      serviceAccountName: {{ include "22-bot.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:

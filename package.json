@@ -1,9 +1,9 @@
 {
-  "name": "kou-yagami",
+  "name": "22-bot",
   "version": "1.0.0",
-  "description": "Eagle Jump Discord bot",
+  "description": "22娘 Discord bot",
   "main": "index.js",
-  "repository": "git@github.com:fhaze/kou-yagami.git",
+  "repository": "git@github.com:fhaze/22-bot.git",
   "author": "fhaze <eder_arm@icloud.com>",
   "license": "MIT",
   "scripts": {

@@ -7,7 +7,7 @@ const { client } = require("../integrations/discord");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('info')
-    .setDescription('Information about Kou Yagami Bot'),
+    .setDescription('Information about 22娘 Bot'),
   execute: async (_, interaction) => {
     const data = fs.readFileSync('/etc/os-release', 'utf8').split("\n")
     let version = []
@@ -24,11 +24,11 @@ module.exports = {
 
     const embed = new Discord.MessageEmbed()
     embed
-      .setAuthor({ name: "Kou Yagami's Info", iconURL: interaction.guild.iconURL() })
+      .setAuthor({ name: "22娘's Info", iconURL: interaction.guild.iconURL() })
       .setThumbnail(client.user.displayAvatarURL({ size: 256 }))
       .setFields(
         {name: "Running on", value: config.COMMIT_HASH ? "[Tencent Cloud](https://cloud.tencent.com)" : "My Local Machine"},
-        {name: "Image Tag", value: `[${config.COMMIT_HASH ?? "Unknown"}](https://hub.docker.com/repository/docker/fhaze/kou-yagami)`},
+        {name: "Image Tag", value: `[${config.COMMIT_HASH ?? "Unknown"}](https://hub.docker.com/repository/docker/fhaze/22-bot)`},
         {name: "OS", value: version.join(" ")},
         {name: "Created by", value: "[FHaze](https://github.com/fhaze)"},
       )
