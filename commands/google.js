@@ -1,6 +1,7 @@
 const { SlashCommandBuilder } = require('@discordjs/builders')
 const axios = require("axios").default
 const { RAPID_API_KEY } = require("../secrets")
+const Discord = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -31,6 +32,13 @@ module.exports = {
 
     const { description, link, title } = results[0]
 
-    await interaction.editReply(`**${title}**\n${description}\n${link}`)
+    const embed = new Discord.MessageEmbed()
+    embed
+      .setAuthor({ name: "Google", iconURL: interaction.guild.iconURL() })
+      .setTitle(title)
+      .setDescription(`${description} ${link}`)
+      .setFooter({ text: "Search by Google" })
+
+    await interaction.editReply({ embeds: [ embed ] })
   }
 }

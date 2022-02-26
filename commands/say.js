@@ -4,13 +4,14 @@ const axios = require("axios").default
 const { VOICE_RSS_KEY} = require("../secrets")
 const { writeFileSync } = require('fs')
 const crypto = require('crypto')
+const Discord = require("discord.js");
 
 const player = createAudioPlayer()
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('say')
-    .setDescription('Say something on the channel you are on')
+    .setDescription('Say something on the voice channel you are on')
     .addStringOption(opt => opt
       .setName("text")
       .setDescription("Text to be said")
@@ -84,6 +85,12 @@ module.exports = {
       console.error(error)
     }
 
-    await interaction.editReply(`I said "${text}" on the <#${voiceChannel.id}> channel.`)
+    const embed = new Discord.MessageEmbed()
+    embed
+      .setAuthor({ name: "Say", iconURL: interaction.guild.iconURL() })
+      .setDescription(`I said "${text}" on the <#${voiceChannel.id}> channel.`)
+      .setFooter({ text: "Voice by Voice RSS" })
+
+    await interaction.editReply({ embeds: [ embed ] })
   }
 }

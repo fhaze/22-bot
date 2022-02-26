@@ -7,7 +7,7 @@ const { client } = require("../integrations/discord");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('info')
-    .setDescription('Information about 22娘 Bot'),
+    .setDescription('Information about 22娘 Discord Bot'),
   execute: async (_, interaction) => {
     const data = fs.readFileSync('/etc/os-release', 'utf8').split("\n")
     let version = []

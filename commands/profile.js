@@ -6,7 +6,7 @@ const {isoToPretty} = require("../utils");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('profile')
-    .setDescription("Your Eagle Jump's Profile"),
+    .setDescription("Show your Profile"),
   execute: async (_, interaction) => {
     const { name, messageCount, commandCount, eagleCoin, joinedAt, exp, requiredExp, level } = await api.user.get(interaction.user.id)
 
