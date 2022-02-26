@@ -28,7 +28,7 @@ module.exports = {
       .setThumbnail(client.user.displayAvatarURL({ size: 256 }))
       .setFields(
         {name: "Running on", value: config.COMMIT_HASH ? "[Tencent Cloud](https://cloud.tencent.com)" : "My Local Machine"},
-        {name: "Image Tag", value: `[${config.COMMIT_HASH ?? "Unknown"}](https://hub.docker.com/repository/docker/fhaze/22-bot)`},
+        {name: "Image Tag", value: `[${config.COMMIT_HASH ?? "Unknown"}](https://hub.docker.com/repository/docker/fhaze/discord-22-bot)`},
         {name: "OS", value: version.join(" ")},
         {name: "Created by", value: "[FHaze](https://github.com/fhaze)"},
       )

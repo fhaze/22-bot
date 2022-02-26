@@ -1,9 +1,9 @@
 {
-  "name": "22-bot",
+  "name": "discord-22-bot",
   "version": "1.0.0",
   "description": "22娘 Discord bot",
   "main": "index.js",
-  "repository": "git@github.com:fhaze/22-bot.git",
+  "repository": "git@github.com:fhaze/discord-22-bot.git",
   "author": "fhaze <eder_arm@icloud.com>",
   "license": "MIT",
   "scripts": {
