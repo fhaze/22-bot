@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders')
 const axios = require("axios").default
-const { RAPID_API_KEY } = require("../secrets")
+const { RAPID_API_KEY } = require("../../secrets")
 const Discord = require("discord.js");
 
 module.exports = {

@@ -1,21 +1,28 @@
 const { BOT_TOKEN } = require("./secrets")
 const { Collection} = require('discord.js')
 const fs = require("fs")
-const { sumUserMessage, sumUserCommand } = require('./integrations/discord-22/service/user')
-const { client } = require('./integrations/discord')
+const { sumUserMessage, sumUserCommand } = require('./external/discord-22/service/user')
+const { client } = require('./external/discord')
 
 client.commands = new Collection()
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'))
+const commandFiles = fs.readdirSync('./interactions/commands').filter(file => file.endsWith('.js'))
 commandFiles.forEach(file => {
-  const command = require(`./commands/${file}`)
+  const command = require(`./interactions/commands/${file}`)
   client.commands.set(command.data.name, command)
 })
 
 const reactions = new Collection()
-const reactionsFiles = fs.readdirSync('./reactions').filter(file => file.endsWith('.js'))
+const reactionsFiles = fs.readdirSync('./interactions/reactions').filter(file => file.endsWith('.js'))
 reactionsFiles.forEach(file => {
-  const reaction = require(`./reactions/${file}`)
+  const reaction = require(`./interactions/reactions/${file}`)
   reactions.set(reaction.title, reaction)
+})
+
+const buttons = new Collection()
+const buttonsFiles = fs.readdirSync('./interactions/buttons').filter(file => file.endsWith('.js'))
+buttonsFiles.forEach(file => {
+  const button = require(`./interactions/buttons/${file}`)
+  buttons.set(file.replace(".js", ""), button)
 })
 
 const checkMessageReaction = async (reaction, user, func) => {
@@ -48,6 +55,20 @@ client.on('messageReactionAdd', async (reaction, user) => {
 
 client.on('messageReactionRemove', async (reaction, user) => {
   await checkMessageReaction(reaction, user, "remove")
+})
+
+client.on('interactionCreate', async interaction => {
+  if (!interaction.isButton()) return
+  if (!interaction.customId) return
+
+  const [prefix, suffix] = interaction.customId.split(/_(.+)/)
+  if (prefix && suffix) {
+    const button = buttons.get(prefix)
+    await button?.execute(interaction, suffix)
+  } else {
+    const button = buttons.get(interaction.customId)
+    await button?.execute(interaction)
+  }
 })
 
 client.on('interactionCreate', async interaction => {

@@ -1,7 +1,7 @@
 const {SlashCommandBuilder} = require("@discordjs/builders")
-const api = require("../integrations/discord-22/api");
+const api = require("../../external/discord-22/api");
 const Discord = require('discord.js')
-const {isoToPretty} = require("../utils");
+const {isoToPretty} = require("../../utils");
 
 module.exports = {
   data: new SlashCommandBuilder()

@@ -1,7 +1,7 @@
 const { joinVoiceChannel, createAudioPlayer, createAudioResource, StreamType } = require('@discordjs/voice')
 const { SlashCommandBuilder } = require('@discordjs/builders')
 const axios = require("axios").default
-const { VOICE_RSS_KEY} = require("../secrets")
+const { VOICE_RSS_KEY} = require("../../secrets")
 const { writeFileSync } = require('fs')
 const crypto = require('crypto')
 const Discord = require("discord.js");
