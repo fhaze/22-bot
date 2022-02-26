@@ -12,7 +12,7 @@ module.exports = {
 
     const embed = new Discord.MessageEmbed()
     embed
-      .setAuthor({ name: `${name}'s Profile`, iconURL: interaction.guild.iconURL() })
+      .setTitle(`${name}'s Profile`)
       .setThumbnail(interaction.user.displayAvatarURL({ size: 256 }))
       .addFields(
         { name: "Level", value: `${level}`, inline: true },

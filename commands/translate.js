@@ -2,7 +2,6 @@ const { SlashCommandBuilder } = require('@discordjs/builders')
 const axios = require("axios").default
 const { RAPID_API_KEY } = require("../secrets")
 const Discord = require("discord.js");
-const {isoToPretty} = require("../utils");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -65,8 +64,7 @@ module.exports = {
     const translatedText = data[0].translations[0].text
 
     const embed = new Discord.MessageEmbed()
-    embed
-      .setAuthor({ name: "Translation", iconURL: interaction.guild.iconURL() })
+      .setTitle("Translation")
       .addFields(
         { name: text, value: translatedText },
       )

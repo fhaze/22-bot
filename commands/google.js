@@ -33,8 +33,6 @@ module.exports = {
     const { description, link, title } = results[0]
 
     const embed = new Discord.MessageEmbed()
-    embed
-      .setAuthor({ name: "Google", iconURL: interaction.guild.iconURL() })
       .setTitle(title)
       .setDescription(`${description} ${link}`)
       .setFooter({ text: "Search by Google" })

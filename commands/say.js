@@ -86,8 +86,7 @@ module.exports = {
     }
 
     const embed = new Discord.MessageEmbed()
-    embed
-      .setAuthor({ name: "Say", iconURL: interaction.guild.iconURL() })
+      .setTitle("Say")
       .setDescription(`I said "${text}" on the <#${voiceChannel.id}> channel.`)
       .setFooter({ text: "Voice by Voice RSS" })
 

@@ -2,13 +2,12 @@ const { SlashCommandBuilder } = require('@discordjs/builders')
 const fs = require('fs')
 const config = require("../config")
 const Discord = require("discord.js");
-const { client } = require("../integrations/discord");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('info')
     .setDescription('Information about 22娘 Discord Bot'),
-  execute: async (_, interaction) => {
+  execute: async (client, interaction) => {
     const data = fs.readFileSync('/etc/os-release', 'utf8').split("\n")
     let version = []
 
@@ -23,8 +22,7 @@ module.exports = {
     })
 
     const embed = new Discord.MessageEmbed()
-    embed
-      .setAuthor({ name: "22娘's Info", iconURL: interaction.guild.iconURL() })
+      .setTitle("22娘's Info")
       .setThumbnail(client.user.displayAvatarURL({ size: 256 }))
       .setFields(
         {name: "Running on", value: config.COMMIT_HASH ? "[Tencent Cloud](https://cloud.tencent.com)" : "My Local Machine"},

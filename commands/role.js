@@ -1,0 +1,56 @@
+const {SlashCommandBuilder} = require("@discordjs/builders")
+const Discord = require("discord.js")
+
+module.exports = {
+  data: new SlashCommandBuilder()
+    .setName('role')
+    .addStringOption(option => option.setName("role1").setDescription("insert a role and emoji").setRequired(true))
+    .addStringOption(option => option.setName("role2").setDescription("insert a role and emoji"))
+    .addStringOption(option => option.setName("role3").setDescription("insert a role and emoji"))
+    .addStringOption(option => option.setName("role4").setDescription("insert a role and emoji"))
+    .addStringOption(option => option.setName("role5").setDescription("insert a role and emoji"))
+    .addStringOption(option => option.setName("role6").setDescription("insert a role and emoji"))
+    .addStringOption(option => option.setName("role7").setDescription("insert a role and emoji"))
+    .addStringOption(option => option.setName("role8").setDescription("insert a role and emoji"))
+    .addStringOption(option => option.setName("role9").setDescription("insert a role and emoji"))
+    .setDescription('Role Chooser'),
+  execute: async (client, interaction) => {
+    const opts = new Map()
+
+    for (let i = 1; i < 9; i++) {
+      const tuple = interaction.options.getString(`role${i}`)
+
+      if (!tuple) {
+        continue
+      }
+
+      const role = tuple.match(/<@&[0-9]+>/)
+      const emoji = tuple.match(/<:.+:[0-9]+>/)
+
+      if (!role || !emoji || role.length !== 1 || emoji.length !== 1) {
+        continue
+      }
+
+      opts.set(emoji[0], role[0])
+    }
+
+    let content = ""
+    for (let [emoji, role] of opts) {
+      content += `${emoji} ${role}\n`
+    }
+
+    console.log(content)
+
+    const embed = new Discord.MessageEmbed()
+      .setThumbnail(client.user.displayAvatarURL({size: 128}))
+      .setTitle("Role Chooser")
+      .setDescription(content)
+
+    const msg = await interaction.reply({ embeds: [embed], fetchReply: true })
+    for (let [emoji, _] of opts) {
+      console.log(emoji)
+      await msg.react(emoji)
+    }
+
+  }
+}
