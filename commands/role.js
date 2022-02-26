@@ -15,6 +15,12 @@ module.exports = {
     .addStringOption(option => option.setName("role9").setDescription("insert a role and emoji"))
     .setDescription('Role Chooser'),
   execute: async (client, interaction) => {
+    // TODO: remove hardcoded id
+    if (interaction.user.id !== "383046742540681218") {
+      await interaction.reply({ content: "You don't have permission for this.", ephemeral: true })
+      return
+    }
+
     const opts = new Map()
 
     for (let i = 1; i < 9; i++) {
@@ -25,7 +31,7 @@ module.exports = {
       }
 
       const role = tuple.match(/<@&[0-9]+>/)
-      const emoji = tuple.match(/<:.+:[0-9]+>/)
+      const emoji = tuple.match(/<a?:.+:[0-9]+>/)
 
       if (!role || !emoji || role.length !== 1 || emoji.length !== 1) {
         continue
@@ -39,7 +45,6 @@ module.exports = {
       content += `${emoji} ${role}\n`
     }
 
-    console.log(content)
 
     const embed = new Discord.MessageEmbed()
       .setThumbnail(client.user.displayAvatarURL({size: 128}))
