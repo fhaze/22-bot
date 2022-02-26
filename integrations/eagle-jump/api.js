@@ -2,7 +2,7 @@ const axios = require("axios")
 const { EAGLE_JUMP_ROOT_API_KEY } = require('../../secrets')
 const { EAGLE_JUMP_API_ENDPOINT } = require('../../config')
 
-const baseUrl = EAGLE_JUMP_API_ENDPOINT ?? "http://localhost:8888/eagle-jump"
+const baseUrl = EAGLE_JUMP_API_ENDPOINT ?? "http://localhost:8888/eagle-jump/api"
 const client = new axios.create({baseURL: `${baseUrl}/v1`, headers: { "X-EAGLE-JUMP-KEY": EAGLE_JUMP_ROOT_API_KEY }})
 
 module.exports = {

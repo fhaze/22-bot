@@ -8,16 +8,16 @@ module.exports = {
     .setName('profile')
     .setDescription("Your Eagle Jump's Profile"),
   execute: async (_, interaction) => {
-    const { name, messageCount, commandCount, eagleCoin, joinedAt } = await api.user.get(interaction.user.id)
+    const { name, messageCount, commandCount, eagleCoin, joinedAt, exp, requiredExp, level } = await api.user.get(interaction.user.id)
 
     const embed = new Discord.MessageEmbed()
     embed
       .setAuthor({ name: `${name}'s Profile`, iconURL: interaction.guild.iconURL() })
       .setThumbnail(interaction.user.displayAvatarURL({ size: 256 }))
       .addFields(
-        { name: "Level", value: `1`, inline: true },
-        { name: "EXP", value: `0`, inline: true },
-        { name: "\u200B", value: `\u200B`, inline: true },
+        { name: "Level", value: `${level}`, inline: true },
+        { name: "EXP", value: `${exp}`, inline: true },
+        { name: "To Next Level", value: `${requiredExp}`, inline: true },
         { name: "Messages", value: `${messageCount}`, inline: true },
         { name: "Commands", value: `${commandCount}`, inline: true },
         { name: "Eagle Coin", value: `${eagleCoin}`, inline: true },
