@@ -4,7 +4,7 @@ const { CLIENT_ID, GUILD_ID, BOT_TOKEN } = require('./secrets')
 const fs = require('fs')
 
 const commands = []
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'))
+const commandFiles = fs.readdirSync('./interactions/commands').filter(file => file.endsWith('.js'))
 
 for (const file of commandFiles) {
   const command = require(`./interactions/commands/${file}`)
