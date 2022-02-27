@@ -3,6 +3,7 @@ const { Collection} = require('discord.js')
 const fs = require("fs")
 const { sumUserMessage, sumUserCommand } = require('./external/discord-22/service/user')
 const { client } = require('./external/discord')
+const {logger} = require("./logger");
 
 client.commands = new Collection()
 const commandFiles = fs.readdirSync('./interactions/commands').filter(file => file.endsWith('.js'))
@@ -30,7 +31,7 @@ const checkMessageReaction = async (reaction, user, func) => {
     try {
       await reaction.fetch();
     } catch (error) {
-      console.error('Something went wrong when fetching the message:', error)
+      logger.error(`'something went wrong when fetching the message:`, error)
       return
     }
   }
@@ -42,9 +43,10 @@ const checkMessageReaction = async (reaction, user, func) => {
     if (!reactionAction) return
 
     try {
+      logger.info(`user id=${user.id} name=${user.username} executing reaction '${func}'`)
       await reactionAction[func](reaction, user)
     } catch (error) {
-      console.error(error)
+      logger.error(`user id=${user.id} name=${user.username} failed executing reaction ${func}: ${error.message}`)
     }
   }
 }
@@ -62,6 +64,7 @@ client.on('interactionCreate', async interaction => {
   if (!interaction.customId) return
 
   const [prefix, suffix] = interaction.customId.split(/_(.+)/)
+  logger.info(`user id=${interaction.user.id} name=${interaction.user.username} executing button id=${prefix} aux=${suffix}`)
   if (prefix && suffix) {
     const button = buttons.get(prefix)
     await button?.execute(interaction, suffix)
@@ -78,6 +81,7 @@ client.on('interactionCreate', async interaction => {
   if (!command) return
 
   try {
+    logger.info(`user id=${interaction.user.id} name=${interaction.user.username} executing command=${interaction.commandName}`)
     await command.execute(client, interaction)
     await sumUserCommand({ user: interaction.user, count: 1 })
   } catch (error) {
@@ -93,7 +97,7 @@ client.on('messageCreate', async message => {
 })
 
 client.once('ready', () => {
-  console.log('Ready!')
+  logger.info("discord-22-bot ready!")
 })
 
 client.login(BOT_TOKEN)

@@ -106,7 +106,6 @@ const getEvidences = evidencesText => {
   const evidences = new Map()
   for (const evTuple of evidencesText.split("\n")) {
     const [ status, evidence ] = evTuple.split(/ (.+)/)
-    console.log(status, evidence)
     if (!status || !evidence) break
     evidences.set(evidence, status === EVIDENCE_Y)
   }
