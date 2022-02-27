@@ -1,4 +1,4 @@
-name: Deploy Bot
+name: Deploy Discord 22 Bot
 
 on:
   push:
@@ -57,7 +57,7 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Deploy commands to Eagle Jump
+      - name: Deploy commands to Eagle Jump Discord Server
         run: |
           export CLIENT_ID=${{ secrets.CLIENT_ID }}
           export GUILD_ID=${{ secrets.GUILD_ID }}
@@ -65,7 +65,7 @@ jobs:
           yarn
           yarn run deploy-commands
 
-      - name: Deploy bot to Cluster
+      - name: Deploy discord 22 bot to cluster
         uses: wahyd4/kubectl-helm-action@master
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}

@@ -46,7 +46,7 @@ const checkMessageReaction = async (reaction, user, func) => {
       logger.info(`user id=${user.id} name=${user.username} executing reaction '${func}'`)
       await reactionAction[func](reaction, user)
     } catch (error) {
-      logger.error(`user id=${user.id} name=${user.username} failed executing reaction ${func}: ${error.message}`)
+      logger.error(`user id=${user.id} name=${user.username} failed executing this reaction ${func}: ${error.message}`)
     }
   }
 }
