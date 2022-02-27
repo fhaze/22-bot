@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders')
+const api = require("../../external/discord-22/api");
 const fs = require('fs')
 const config = require("../../config")
 const Discord = require("discord.js");
@@ -21,12 +22,15 @@ module.exports = {
       }
     })
 
+    const { tag } = await api.version()
+
     const embed = new Discord.MessageEmbed()
       .setTitle("22娘's Info")
       .setThumbnail(client.user.displayAvatarURL({ size: 256 }))
       .setFields(
         {name: "Running on", value: config.COMMIT_HASH ? "[Tencent Cloud](https://cloud.tencent.com)" : "My Local Machine"},
-        {name: "Image Tag", value: `[${config.COMMIT_HASH ?? "Unknown"}](https://hub.docker.com/repository/docker/fhaze/discord-22-bot)`},
+        {name: "Bot Image Tag", value: `[${config.COMMIT_HASH ?? "Unknown"}](https://hub.docker.com/repository/docker/fhaze/discord-22-bot)`},
+        {name: "Api Image Tag", value: `[${tag ?? "Unknown"}](https://hub.docker.com/repository/docker/fhaze/discord-22-api)`},
         {name: "OS", value: version.join(" ")},
         {name: "Created by", value: "[FHaze](https://github.com/fhaze)"},
       )

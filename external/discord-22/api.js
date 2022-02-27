@@ -6,6 +6,10 @@ const baseUrl = DISCORD_22_API_ENDPOINT ?? "http://localhost:8888/22/api"
 const client = new axios.create({baseURL: `${baseUrl}/v1`, headers: { "X-22-KEY": DISCORD_22_ROOT_API_KEY }})
 
 module.exports = {
+  version: async () => {
+    const { data } = await client.get("version")
+    return data
+  },
   user: {
     save: async user => {
       const { data } = await client.post(`users`, user)
