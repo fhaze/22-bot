@@ -1,5 +1,6 @@
 const {MessageEmbed} = require("discord.js");
 const {guessGhostEmbed, saveEvidence, EVIDENCE_RESET, EVIDENCE_NONE} = require("../../service/ghost");
+const {logger} = require("../../logger");
 module.exports = {
   execute: async (interaction, id) => {
     let evidenceText = interaction.message.embeds[1].description
@@ -14,7 +15,11 @@ module.exports = {
       .setTitle("Evidences")
       .setDescription(evidenceText)
 
-    await interaction.message.edit({ embeds: [ghostEmbed, evidenceEmbed] })
-    await interaction.deferUpdate()
+    try {
+      await interaction.message.edit({embeds: [ghostEmbed, evidenceEmbed]})
+      await interaction.deferUpdate()
+    } catch (e) {
+      logger.error(`ghost evidence=${id} press: ${e.message}`)
+    }
   }
 }
