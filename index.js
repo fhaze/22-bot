@@ -39,14 +39,16 @@ const checkMessageReaction = async (reaction, user, func) => {
     && reaction.message.embeds.length > 0
     && reaction.message.embeds[0].title.length > 0) {
 
-    const reactionAction = reactions.get(reaction.message.embeds[0].title)
+    const title = reaction.message.embeds[0].title
+
+    const reactionAction = reactions.get(title)
     if (!reactionAction) return
 
     try {
-      logger.info(`user id=${user.id} name=${user.username} executing reaction '${func}'`)
+      logger.info(`user id=${user.id} name=${user.username} executing reaction '${title}_${func}'`)
       await reactionAction[func](reaction, user)
     } catch (error) {
-      logger.error(`user id=${user.id} name=${user.username} failed executing this reaction ${func}: ${error.message}`)
+      logger.error(`user id=${user.id} name=${user.username} failed executing this reaction '${title}_${func}': ${error.message}`)
     }
   }
 }

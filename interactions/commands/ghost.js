@@ -9,8 +9,10 @@ module.exports = {
     .setName('ghost')
     .setDescription("Let's find out the ghost type"),
   execute: async (_, interaction) => {
-    // TODO: remove hardcoded id
-    if (interaction.user.id !== "383046742540681218") {
+    const admin     = interaction.member.roles.cache.find(r => r.name === "Admin")
+    const moderator = interaction.member.roles.cache.find(r => r.name === "Moderator")
+
+    if (!admin && !moderator) {
       await interaction.reply({ content: "You don't have permission for this.", ephemeral: true })
       return
     }
