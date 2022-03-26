@@ -83,8 +83,7 @@ affinity: {}
 
 # Discord Bot Config
 config:
-  commitHash: commit_hash
-  eagleJumpApiEndpoint: http://discord-22-api:8888/22/api
+  discord22Endpoint: http://discord-22-api:8888/discord-22/api
 
 # Discord Bot Secrets
 secrets:
@@ -93,4 +92,4 @@ secrets:
   guildId: guild_id
   rapidApiKey: rapid_api_key
   voiceRssKey: voice_rss_key
-  eagleJumpRootApiKey: root_key
+  discord22RootApiKey: root_key
