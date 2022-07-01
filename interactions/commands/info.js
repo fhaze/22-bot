@@ -28,7 +28,7 @@ module.exports = {
       .setTitle("22娘's Info")
       .setThumbnail(client.user.displayAvatarURL({ size: 256 }))
       .setFields(
-        {name: "Running on", value: config.COMMIT_HASH ? "bilibili" : "My Local Machine"},
+        {name: "Running on", value: config.COMMIT_HASH ? "腾讯云" : "My Local Machine"},
         {name: "Bot Image Tag", value: `[${config.COMMIT_HASH ?? "Unknown"}](https://github.com/fhaze/discord-22-bot/commits/main)`},
         {name: "Api Image Tag", value: `[${tag ?? "Unknown"}](https://github.com/fhaze/discord-22-api/commits/main)`},
         {name: "OS", value: version.join(" ")},
